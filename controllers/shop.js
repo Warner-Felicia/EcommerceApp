@@ -41,7 +41,6 @@ exports.getCart = (req, res, next) => {
         const cartProductData = cart.products.find(prod => prod.id === product.id);
         if (cartProductData) {
           cartProducts.push({ productData: product, qty: cartProductData.qty });
-          console.log(cartProducts);
         }
       }
       res.render('shop/cart', {

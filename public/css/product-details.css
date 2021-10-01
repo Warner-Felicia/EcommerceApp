@@ -1,0 +1,44 @@
+.product__details {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+    max-width: 700px;
+    margin: 20px auto;
+}
+
+.product__details__image {
+    width: 33%;
+}
+
+.product__details__image img {
+    width: 100%;
+}
+
+.product__details__content {
+    margin-left: 20px;
+    text-align: left;
+    width: 66%;
+    font-family:'Courier New', Courier, monospace;
+}
+
+.product__details__title {
+    margin: 0px;
+    font-size: 2rem;
+}
+
+.product__details__author {
+    margin: 0px;
+    color: #293E59;
+    font-size: 1.5rem;
+}
+
+.product__details__summary {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.product__details__price {
+    margin-bottom: 0.5rem; 
+    color: #BF2B38; 
+    font-size: 1.5rem;
+    font-weight: bold;
+}

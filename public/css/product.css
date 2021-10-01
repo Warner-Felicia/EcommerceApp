@@ -1,27 +1,30 @@
-.product-form {
-    width: 20rem;
-    max-width: 90%;
-    margin: auto;
-    display: block;
-}
-
 .product-item {
-    width: 20rem;
+    width: 25rem;
     max-width: 95%;
     margin: 1rem;
+    box-shadow: 1px 1px 5px #293E59;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.product-item:hover {
+    box-shadow: 2px 2px 5px #293E59;
 }
 
 .product__title {
+    font-size: 1.4rem;
+    margin: 0px;
+}
+
+.product__author {
     font-size: 1.2rem;
-    text-align: center;
+    margin-top: 0px; 
+    margin-bottom: 10px; 
+    color: #293E59;
 }
 
 .product__price {
-    text-align: center;
-    color: #4d4d4d;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem; 
+    color: #BF2B38;   
 }
 
-.product__description {
-    text-align: center;
-}

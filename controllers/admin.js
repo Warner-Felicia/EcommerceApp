@@ -10,17 +10,18 @@ exports.getAddProduct = (req, res, next) => {
 
 exports.postAddProduct = (req, res, next) => {
   const title = req.body.title;
+  const author = req.body.author;
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
-  const description = req.body.description;
-  const product = new Product(null, title, imageUrl, description, price);
+  const summary = req.body.summary;
+  const product = new Product(null, title, author, imageUrl, price, summary);
+
   product.save();
   res.redirect('/');
 };
 
 exports.getEditProduct = (req, res, next) => {
   const editMode = req.query.edit;
-  console.log(editMode);
   if (!editMode) {
     return res.redirect('/');
   }
@@ -36,18 +37,19 @@ exports.getEditProduct = (req, res, next) => {
       product: product
     });
   });
-  
+
 };
 
 exports.postEditProduct = (req, res, next) => {
   const productId = req.body.productId;
   const updatedTitle = req.body.title;
-  const updatedPrice = req.body.price;
+  const updatedAuthor = req.body.author;
   const updatedImageUrl = req.body.imageUrl;
-  const updatedDescription = req.body.description;
+  const updatedPrice = req.body.price;
+  const updatedSummary = req.body.summary;
 
-  const updatedProduct = new Product(productId, updatedTitle, updatedImageUrl, updatedDescription, updatedPrice);
-  updatedProduct.save();  
+  const updatedProduct = new Product(productId, updatedTitle, updatedAuthor, updatedImageUrl, updatedPrice, updatedSummary);
+  updatedProduct.save();
   res.redirect('/admin/products');
 };
 
