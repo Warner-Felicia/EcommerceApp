@@ -11,25 +11,25 @@
             <h2 class='cart__quantity__label'>Quantity</h2>
             <h2 class="cart__total__label">Total</h2>
             <% products.forEach(p=> { %>
-            
-                <div class='cart__image'>
-                    <img src='<%=p.productData.imageUrl %>' alt='<%=p.productData.title %>'>
-                </div>
-                <p><%=p.productData.title %></p>
 
-                <p><%=p.qty %></p>
+            <div class='cart__image'>
+                <img src='<%=p.productData.imageUrl %>' alt='<%=p.productData.title %>'>
+            </div>
+            <p><%=p.productData.title %></p>
 
-                <p><%=p.qty * p.productData.price %></p>
+            <p><%=p.qty %></p>
 
-                <form action='/cart-delete-item' method='POST'>
-                    <input type='hidden' name='productId' value='<%=p.productData.id %>'>
-                    <button class='btn' type='submit'>Delete</button>
-                </form>
+            <p><%=p.qty * p.productData.price %></p>
 
-                <% }) %>
-            
-            <% } else { %>
-            <h1>Your Cart is Empty</h1>
-            <% } %>
+            <form action='/cart-delete-item' method='POST'>
+                <input type='hidden' name='productId' value='<%=p.productData.id %>'>
+                <button class='btn' type='submit'>Delete</button>
+            </form>
+
+            <% }) %>
+        </div>
+        <% } else { %>
+        <h1>Your Cart is Empty</h1>
+        <% } %>
     </main>
     <%- include('../includes/end.ejs') %>

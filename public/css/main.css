@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+/* @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700'); */
 
 * {
   box-sizing: border-box;
@@ -102,7 +102,7 @@ form {
 .mobile-nav__item a:active,
 .mobile-nav__item a:hover,
 .mobile-nav__item a.active {
-  background: #00695c;
+  background: #293E59;
   color: white;
   border-radius: 3px;
 }
@@ -123,8 +123,8 @@ form {
 
 #side-menu-toggle:active,
 #side-menu-toggle:hover {
-  color: #ffeb3b;
-  border-color: #ffeb3b;
+  border: none;
+  border-bottom: 2px solid white;
 }
 
 .backdrop {
