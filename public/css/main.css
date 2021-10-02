@@ -154,6 +154,7 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 66%
 }
 
 .card__content h1,
