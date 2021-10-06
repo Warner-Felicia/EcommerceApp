@@ -37,15 +37,14 @@ const options = {
     family: 4
 };
 
-const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://foodles:q61iUB0qfaRSZPAp@cse341cluster-3dwlw.mongodb.net/shop?retryWrites=true&w=majority";
-
+const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://foodles:q61iUB0qfaRSZPAp@cluster0.6dqnd.mongodb.net/shop?retryWrites=true&w=majority";
 
 mongoose
   .connect(
     MONGODB_URL, options
   )
   .then(result => {
-    // This should be your user handling code implement following the course videos
+    console.log('hello');
     app.listen(PORT);
   })
   .catch(err => {
