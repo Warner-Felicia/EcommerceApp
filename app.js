@@ -24,7 +24,7 @@ app.use(shopRoutes);
 app.use(errorController.get404);
 
 const corsOptions = {
-    origin: "https://<your_app_name>.herokuapp.com/",
+    origin: "https://ecommerceappfw.herokuapp.com/",
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
