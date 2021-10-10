@@ -1,5 +1,5 @@
 const path = require('path');
-// const cors = require('cors');
+const cors = require('cors');
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -7,6 +7,11 @@ const mongoose = require('mongoose');
 
 const errorController = require('./controllers/error');
 const User = require('./models/user');
+
+const corsOptions = {
+    origin: "https://ecommerceappfw.herokuapp.com/",
+    optionsSuccessStatus: 200
+};
 
 const app = express();
 
@@ -35,23 +40,19 @@ app.use(shopRoutes);
 
 app.use(errorController.get404);
 
-// const corsOptions = {
-//     origin: "https://ecommerceappfw.herokuapp.com/",
-//     optionsSuccessStatus: 200
-// };
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
-// const options = {
-//     useUnifiedTopology: true,
-//     useNewUrlParser: true,
-//     useCreateIndex: true,
-//     useFindAndModify: false,
-//     family: 4
-// };
+const options = {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+    // useCreateIndex: true,
+    // useFindAndModify: false,
+    family: 4
+};
 
-// const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://foodles:q61iUB0qfaRSZPAp@cluster0.6dqnd.mongodb.net/shop?retryWrites=true&w=majority";
+const MONGODB_URL = process.env.MONGODB_URL || "mongodb+srv://foodles:q61iUB0qfaRSZPAp@cluster0.woawi.mongodb.net/ecommerce?retryWrites=true&w=majority";
 
-mongoose.connect('mongodb+srv://foodles:q61iUB0qfaRSZPAp@cluster0.woawi.mongodb.net/ecommerce?retryWrites=true&w=majority')
+mongoose.connect(MONGODB_URL, options)
   .then(result => {
     User.findOne()
       .then(user => {
@@ -72,7 +73,7 @@ mongoose.connect('mongodb+srv://foodles:q61iUB0qfaRSZPAp@cluster0.woawi.mongodb.
       .catch(err => console.log(err));
 
 
-    app.listen(5000);
+      app.listen(process.env.PORT || 5000);
   })
   .catch(err => {
     console.log(err);
