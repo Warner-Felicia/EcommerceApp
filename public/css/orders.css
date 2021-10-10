@@ -1,0 +1,29 @@
+.order {
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px #293E59;
+    padding: 10px;
+    width: 30%;
+    min-width: 250px;
+    padding: 20px;
+}
+
+.order_product {
+    display: flex;
+    justify-content: space-between;
+}
+
+.order_product_image {
+    width: 25%;
+}
+
+.order_product_image img {
+    width: 100%;
+}
+
+.order_product p {
+    width: 70%;
+}
+
+
+
+

@@ -13,21 +13,24 @@
             <% products.forEach(p=> { %>
 
             <div class='cart__image'>
-                <img src='<%=p.productData.imageUrl %>' alt='<%=p.productData.title %>'>
+                <img src='<%=p.productId.imageUrl %>' alt='<%=p.productId.title %>'>
             </div>
-            <p><%=p.productData.title %></p>
+            <p><%=p.productId.title %></p>
 
-            <p><%=p.qty %></p>
+            <p><%=p.quantity %></p>
 
-            <p><%=p.qty * p.productData.price %></p>
+            <p><%=p.quantity * p.productId.price %></p>
 
             <form action='/cart-delete-item' method='POST'>
-                <input type='hidden' name='productId' value='<%=p.productData.id %>'>
+                <input type='hidden' name='productId' value='<%=p.productId._id %>'>
                 <button class='btn' type='submit'>Delete</button>
             </form>
 
             <% }) %>
         </div>
+        <form action='/orders' method='POST'>
+            <button type='submit' class='btn'>Order Now</button>
+        </form>
         <% } else { %>
         <h1>Your Cart is Empty</h1>
         <% } %>
