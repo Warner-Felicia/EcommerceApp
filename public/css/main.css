@@ -194,9 +194,21 @@ form {
   color: #293E59;
 }
 
+.user-message {
+  width: 90%;
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+  margin-top: 20px;
+  color:#BF2B38;
+  font-size: 1.5rem;
+}
+
 @media (min-width: 768px) {
   .main-header__nav {
     display: flex;
+    justify-content: space-between;
+    width: 100%;
   }
 
   #side-menu-toggle {

@@ -14,8 +14,10 @@
                 <h1 class='product__details__title'><%= product.title %></h1>
                 <h2 class='product__details__author'>by <%= product.author %></h2>
                 <p class='product__details__summary'><%= product.summary %></p>
-                <p class='product__details__price'>$<%= product.price %></p>                
+                <p class='product__details__price'>$<%= product.price %></p>    
+                <% if (isAuthenticated) { %>            
                 <%- include('../includes/addToCart.ejs') %>
+                <% } %>
             </div>
         </section>
     </main>>

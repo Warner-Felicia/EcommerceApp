@@ -1,0 +1,57 @@
+<%- include('../includes/head.ejs') %>
+<link rel='stylesheet' href='/css/forms.css'>
+</head>
+
+<body>
+    <%- include('../includes/navigation.ejs') %>
+    <main>
+        <% if (errorMessage) { %>
+        <div class='user-message user-message-error'><%= errorMessage %></div>
+        <% } %>
+
+        <form class="product-form" action='/signup' method='post'>
+            <div class="form-control">
+                <label for='firstName'>First Name</label>
+                <input type='firstName' id='firstName' name='firstName'>
+            </div>
+            <div class="form-control">
+                <label for='lastName'>Last Name</label>
+                <input type='lastName' id='lastName' name='lastName'>
+            </div>
+            </div>
+            <div class="form-control">
+                <label for='phoneNumber'>Phone Number</label>
+                <input type='phoneNumber' id='phoneNumber' name='phoneNumber'>
+            </div>
+            </div>
+            <div class="form-control">
+                <label for='streetAddress'>Street Address</label>
+                <input type='streetAddress' id='streetAddress' name='streetAddress'>
+            </div>
+            <div class="form-control">
+                <label for='city'>City</label>
+                <input type='city' id='city' name='city'>
+            </div>
+            <div class="form-control">
+                <label for='state'>State</label>
+                <input type='state' id='state' name='state'>
+            </div>
+            <div class="form-control">
+                <label for='zipCode'>Zip Code</label>
+                <input type='zipCode' id='zipCode' name='zipCode'>
+            </div>
+            <div class="form-control">
+                <label for='email'>Email Address</label>
+                <input type='email' id='email' name='email'>
+            </div>
+            <div class="form-control">
+                <label for='password'>Password</label>
+                <input type='password' id='password' name='password'>
+            </div>
+            <input type='hidden' name='_csrf' value='<%= csrfToken %>'>
+            <button type='submit' class='btn'>Sign Up</button>
+
+        </form>
+    </main>
+
+    <%- include('../includes/end.ejs') %>

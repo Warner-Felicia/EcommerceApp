@@ -2,7 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-    username: {
+    firstName: {
+        type: String,
+        required: true
+    },
+    lastName: {
         type: String,
         required: true
     },
@@ -10,11 +14,24 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    password: {
+        type: String,
+        require: true
+    },
     phoneNumber: {
         type: Number,
     },
-    address: {
+    streetAddress: {
         type: String,
+    },
+    city: {
+        type: String,
+    },
+    state: {
+        type: String,
+    },
+    zipCode: {
+        type: Number,
     },
     cart: {
         items: [{

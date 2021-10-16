@@ -23,12 +23,14 @@
 
             <form action='/cart-delete-item' method='POST'>
                 <input type='hidden' name='productId' value='<%=p.productId._id %>'>
+                <input type='hidden' name='_csrf' value='<%= csrfToken %>'>
                 <button class='btn' type='submit'>Delete</button>
             </form>
 
             <% }) %>
         </div>
         <form action='/orders' method='POST'>
+            <input type='hidden' name='_csrf' value='<%= csrfToken %>'>
             <button type='submit' class='btn'>Order Now</button>
         </form>
         <% } else { %>
