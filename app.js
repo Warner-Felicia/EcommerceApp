@@ -11,9 +11,8 @@ const flash = require('connect-flash');
 
 const errorController = require('./controllers/error');
 const User = require('./models/user');
-const dbConnectionString = require('./localVariables').dbConnectionString;
 
-const MONGODB_URI = dbConnectionString;
+const MONGODB_URI = 'mongodb+srv://foodles:ajp8tJsSw4ng2sSV@cluster0.woawi.mongodb.net/ecommerce?retryWrites=true&w=majority';
 
 const corsOptions = {
     origin: "https://ecommerceappfw.herokuapp.com/",
