@@ -85,7 +85,7 @@ const options = {
 
 const MONGODB_URL = process.env.MONGODB_URL || MONGODB_URI;
 
-mongoose.connect(MONGODB_URL, options)
+mongoose.connect(MONGODB_URI, options)
   .then(result => {
       app.listen(process.env.PORT || 5000);
   })
