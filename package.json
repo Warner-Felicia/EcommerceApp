@@ -1,11 +1,11 @@
 {
-  "name": "nodejs-complete-guide",
+  "name": "ecommerce-app",
   "version": "1.0.0",
-  "description": "Complete Node.js Guide",
+  "description": "project for CSE 341",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
+    "start": "nodemon app.js",
     "start-server": "nodemon app.js"
   },
   "author": "Felicia Warner",
