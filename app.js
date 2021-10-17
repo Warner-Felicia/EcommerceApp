@@ -87,7 +87,7 @@ const MONGODB_URL = process.env.MONGODB_URL || MONGODB_URI;
 
 mongoose.connect(MONGODB_URL, options)
   .then(result => {
-      app.listen(process.env.PORT || 5000);
+      app.listen(process.env.PORT || 5000, '0.0.0.0');
   })
   .catch(err => {
     console.log(err);
