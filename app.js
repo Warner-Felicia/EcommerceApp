@@ -11,8 +11,10 @@ const flash = require('connect-flash');
 
 const errorController = require('./controllers/error');
 const User = require('./models/user');
+const dbConnectionString= require('./localVariables').dbConnectionString;
+const mongodbSecret = require('./localVariables').mongoDbSecret;
 
-const MONGODB_URI = 'mongodb+srv://foodles:ajp8tJsSw4ng2sSV@cluster0.woawi.mongodb.net/ecommerce?retryWrites=true&w=majority';
+const MONGODB_URI = dbConnectionString;
 
 const corsOptions = {
     origin: "https://ecommerceappfw.herokuapp.com/",
@@ -38,7 +40,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-  secret: 'mySecretIsMoreAwesomeThanYourSecretAndTheresNothingYouCanDoAboutItSoNaNaNaBooBooOnYou',
+  secret: mongodbSecret,
   resave: false,
   saveUninitialized: false,
   store: store
