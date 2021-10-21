@@ -1,5 +1,6 @@
 const path = require('path');
 const cors = require('cors');
+require('dotenv').config();
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -11,10 +12,8 @@ const flash = require('connect-flash');
 
 const errorController = require('./controllers/error');
 const User = require('./models/user');
-const dbConnectionString= require('./localVariables').dbConnectionString;
-const mongodbSecret = require('./localVariables').mongoDbSecret;
 
-const MONGODB_URI = dbConnectionString;
+const MONGODB_URI = process.env.MONGODB_URL;
 
 const corsOptions = {
     origin: "https://ecommerceappfw.herokuapp.com/",
@@ -40,7 +39,7 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-  secret: mongodbSecret,
+  secret: process.env.MONGODB_SECRET,
   resave: false,
   saveUninitialized: false,
   store: store
