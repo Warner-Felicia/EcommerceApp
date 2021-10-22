@@ -33,6 +33,12 @@ const userSchema = new Schema({
     zipCode: {
         type: Number,
     },
+    token: {
+        type: String
+    },
+    tokenExpiration: {
+        type: Date
+    },
     cart: {
         items: [{
             productId: {type: Schema.Types.ObjectId, ref: 'Product', required: true},

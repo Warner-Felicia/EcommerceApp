@@ -28,3 +28,18 @@
 .form-control textarea:focus {
   outline-color: #00695c;
 }
+
+form a.reset-password {
+  text-decoration: none;
+  display: block;
+  margin-top: 10px;
+  font-size: .9rem;
+  transition: font-size .2s linear
+}
+
+form a.reset-password:hover {
+  font-size: 1.1rem;
+
+}
+
+

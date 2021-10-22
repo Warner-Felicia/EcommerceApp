@@ -1,3 +1,9 @@
+const {
+    validationResult
+  } = require('express-validator');
+
+const crypto = require('crypto');
+
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
@@ -22,6 +28,16 @@ exports.getLogIn = (req, res, next) => {
 exports.postLogIn = (req, res, next) => {
     const email = req.body.email;
     const password = req.body.password;
+    const errors = validationResult(req);
+
+    if(!errors.isEmpty()) {
+        return res.status(422).render('auth/login', {
+            pageTitle: 'Log In',
+            path: '/login',
+            errorMessage: errors.array()[0].msg
+        });
+    }
+
     User.findOne({
             email: email
         })
@@ -69,6 +85,15 @@ exports.postSignUp = (req, res, next) => {
     const zipCode = req.body.zipCode;
     const email = req.body.email;
     const password = req.body.password;
+    const errors = validationResult(req);
+    
+    if(!errors.isEmpty()) {
+        return res.status(422).render('auth/signup', {
+            pageTitle: 'Sign Up',
+            path: '/signup',
+            errorMessage: errors.array()[0].msg
+        });
+    }
 
     User.findOne({
             email: email
@@ -100,7 +125,7 @@ exports.postSignUp = (req, res, next) => {
                     res.redirect('/login');
                     return transporter.sendMail({
                         to: email,
-                        from: 'fwarner@byi.edu',
+                        from: 'fwarner@byui.edu',
                         subject: 'Signup Suceeded',
                         html: '<h1>Thank you for signing up.</h1>'
                     });
@@ -114,4 +139,131 @@ exports.postSignUp = (req, res, next) => {
 exports.postLogOut = (req, res, next) => {
     req.session.destroy();
     res.redirect('/');
+};
+
+exports.getReset = (req, res, next) => {
+    res.render('auth/reset', {
+        pageTitle: 'Password Reset',
+        path: '/reset',
+        errorMessage: req.flash('error')
+    });
+};
+
+exports.postReset = (req, res, next) => {
+    const email = req.body.email;
+    let token;
+    User.findOne({
+            email: email
+        })
+        .then(user => {
+            if (!user) {
+                req.flash('error', 'There is no account associated with that email');
+                return res.redirect('/reset');
+            }
+            crypto.randomBytes(32, (err, buff) => {
+                if (err) {
+                    console.log(err);
+                    return res.redirect('/reset');
+                }
+                token = buff.toString('hex');
+                const tokenExpiration = Date.now() + 3600000;
+                user.token = token;
+                user.tokenExpiration = tokenExpiration;
+                return user.save();
+            });
+        })
+        .then(result => {
+            console.log(req.user);
+            res.redirect('/');
+            return transporter.sendMail({
+                to: email,
+                from: 'fwarner@byui.edu',
+                subject: 'Password Rest',
+                html: `<p>Please click this <a href="http://localhost:5000/reset/${token}"> link </a> to reset your password</p>
+                <p>This link will only be valid for one hour</p>`
+
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+};
+
+exports.getNewPassword = (req, res, next) => {
+    const token = req.params.token;
+    User.findOne({
+            token: token,
+            tokenExpiration: {
+                $gt: Date.now()
+            }
+        })
+        .then(user => {
+            if (!user) {
+                return res.redirect('/');
+            }
+            return res.render('auth/newPassword', {
+                pageTitle: 'Password Reset',
+                path: '/reset',
+                errorMessage: req.flash('error'),
+                userId: user._id,
+                token: token
+            });
+        })
+        .catch(err => {
+            console.log(err);
+        });
+
+};
+
+exports.postNewPassword = (req, res, next) => {
+    const oldPassword = req.body.oldPassword;
+    const newPassword = req.body.newPassword;
+    const userId = req.body.userId;
+    const token = req.body.token;
+
+    User.findOne({
+            _id: userId
+        })
+        .then(user => {
+            bcrypt.compare(oldPassword, user.password)
+                .then(matchBoolean => {
+                    if (matchBoolean) {
+                        return user;
+                    }
+                    req.flash('error', 'Invalid old password');
+                    return res.render('auth/newPassword', {
+                        pageTitle: 'Password Reset',
+                        path: '/reset',
+                        errorMessage: req.flash('error'),
+                        userId: user._id,
+                        token: token
+                    });
+
+                })
+                .then(user => {
+                    console.log('here');
+                    bcrypt.hash(newPassword, 12)
+                    .then(hashedPassword => {
+                        console.log('and here');
+                        user.password = hashedPassword;
+                        user.token = null;
+                        user.tokenExpiration = null;
+                        user.save();
+                        console.log('saved');
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        })
+
+        .catch(err => {
+            console.log(err);
+        });
+
+
+
 };
