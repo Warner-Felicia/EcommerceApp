@@ -1,4 +1,7 @@
 const path = require('path');
+const {
+    body
+} = require('express-validator');
 
 const express = require('express');
 
@@ -14,11 +17,57 @@ router.get('/add-product', isAuth, adminController.getAddProduct);
 router.get('/products', isAuth, adminController.getProducts);
 
 // // /admin/add-product => POST
-router.post('/add-product', isAuth, adminController.postAddProduct);
+router.post('/add-product',
+    [
+        body('title', 'Please enter a title')
+        .isString()
+        .notEmpty()
+        .trim(),
+        body('author', 'Please enter an author')
+        .isString()
+        .notEmpty()
+        .trim(),
+        body('imageUrl', 'Please enter an imageUrl')
+        .isURL()
+        .notEmpty()
+        .trim(),
+        body('price', 'Please enter a price')
+        .isFloat()
+        .notEmpty()
+        .trim(),
+        body('summary', 'Please enter a summary')
+        .isString()
+        .notEmpty()
+        .trim(),
+    ],
+    isAuth, adminController.postAddProduct);
 
 router.get('/edit-product/:productId', isAuth, adminController.getEditProduct);
 
-router.post('/edit-product', isAuth, adminController.postEditProduct);
+router.post('/edit-product',
+    [
+        body('title', 'Please enter a title')
+        .isString()
+        .notEmpty()
+        .trim(),
+        body('author', 'Please enter an author')
+        .isString()
+        .notEmpty()
+        .trim(),
+        body('imageUrl', 'Please enter an imageUrl')
+        .isURL()
+        .notEmpty()
+        .trim(),
+        body('price', 'Please enter a price')
+        .isFloat()
+        .notEmpty()
+        .trim(),
+        body('summary', 'Please enter a summary')
+        .isString()
+        .notEmpty()
+        .trim(),
+    ],
+    isAuth, adminController.postEditProduct);
 
 router.post('/delete-product', isAuth, adminController.postDeleteProduct);
 

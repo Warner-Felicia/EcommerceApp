@@ -39,7 +39,27 @@ form a.reset-password {
 
 form a.reset-password:hover {
   font-size: 1.1rem;
+}
+
+.password-instructions {
+  color: #BF2B38;
+  font-size: .9rem;
+  margin-bottom: -5px;
+}
+
+.passwordToggle {
+  color: #293E59;
+  font-size: .9rem;
+  transition: font-size .2s linear
 
 }
 
+.passwordToggle:hover {
+  font-size: 1.1rem;
+}
+
+.form-control input.invalid {
+  border: 1px solid #BF2B38;
+  transform: scale(1.2);
+}
 
